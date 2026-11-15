@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>见证 4K（粉丝致敬）</title>
+  <meta name="description" content="The Witness 4K (fan tribute) — an original first-person puzzle island.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b1712'/%3E%3Ccircle cx='18' cy='46' r='5' fill='%23e6c27a'/%3E%3Cpath d='M18 46 H34 V30 H48' fill='none' stroke='%23f3ead7' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/game.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="view"></canvas>
+  <div id="ui">
+    <div id="screen-menu">
+      <div class="panel menu-card">
+        <p class="kicker" data-i18n="kicker"></p>
+        <h1><span data-i18n="title"></span> <em data-i18n="subtitle"></em></h1>
+        <p class="tagline" data-i18n="tagline"></p>
+        <div class="menu-actions">
+          <button id="btn-play" class="gold" data-i18n="play"></button>
+          <button id="btn-settings" data-i18n="settings"></button>
+          <button id="btn-help" data-i18n="help"></button>
+          <button id="btn-lang" data-i18n="lang"></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div>
+          <p class="kicker" id="hud-area"></p>
+          <p id="hud-count"></p>
+        </div>
+        <div class="hud-actions">
+          <button id="btn-journal" data-i18n="journal"></button>
+          <button id="btn-shot" data-i18n="shot"></button>
+          <span id="fps"></span>
+        </div>
+      </div>
+      <div id="crosshair"></div>
+      <p id="prompt"></p>
+      <p id="look-hint" class="hidden" data-i18n="clickLook"></p>
+      <div id="area-banner"></div>
+    </div>
+
+    <div id="puzzle-bar" class="hidden">
+      <p id="puzzle-name"></p>
+      <p id="puzzle-hint"></p>
+      <p id="puzzle-fail"></p>
+      <div class="row">
+        <button id="btn-reset" data-i18n="reset"></button>
+        <button id="btn-leave" data-i18n="leave"></button>
+      </div>
+    </div>
+
+    <div id="screen-pause" class="hidden">
+      <div class="panel">
+        <h2 data-i18n="title"></h2>
+        <div class="menu-actions">
+          <button id="btn-resume" class="gold" data-i18n="resume"></button>
+          <button id="btn-pause-settings" data-i18n="settings"></button>
+          <button id="btn-pause-help" data-i18n="help"></button>
+          <button id="btn-pause-journal" data-i18n="journal"></button>
+          <button id="btn-quit" data-i18n="menu"></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-settings" class="hidden">
+      <div class="panel">
+        <h2 data-i18n="settings"></h2>
+        <p class="label" data-i18n="quality"></p>
+        <div class="quality" id="quality-row">
+          <button data-quality="low" data-i18n="low"></button>
+          <button data-quality="medium" data-i18n="medium"></button>
+          <button data-quality="high" data-i18n="high"></button>
+          <button data-quality="ultra" data-i18n="ultra"></button>
+        </div>
+        <p class="note" data-i18n="qualityNote"></p>
+        <label><span data-i18n="sens"></span><input id="sens" type="range" min="0.0008" max="0.006" step="0.0001"></label>
+        <label><span data-i18n="volume"></span><input id="volume" type="range" min="0" max="1" step="0.01"></label>
+        <button id="btn-settings-close" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <div id="screen-help" class="hidden">
+      <div class="panel wide">
+        <h2 data-i18n="helpTitle"></h2>
+        <dl>
+          <dt data-i18n="look"></dt><dd data-i18n="lookBody"></dd>
+          <dt data-i18n="move"></dt><dd data-i18n="moveBody"></dd>
+          <dt data-i18n="interact"></dt><dd data-i18n="interactBody"></dd>
+          <dt data-i18n="shot"></dt><dd data-i18n="shotBody"></dd>
+        </dl>
+        <p data-i18n="rules"></p>
+        <button id="btn-help-close" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <div id="screen-journal" class="hidden">
+      <div class="panel wide">
+        <h2 data-i18n="journalTitle"></h2>
+        <div id="journal-list"></div>
+        <button id="btn-journal-close" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <div id="screen-ending" class="hidden">
+      <div class="ending-copy">
+        <p class="kicker" data-i18n="endingKicker"></p>
+        <p class="ending-line" data-i18n="ending1"></p>
+        <p class="ending-line" data-i18n="ending2"></p>
+        <p class="ending-line" data-i18n="ending3"></p>
+        <button id="btn-ending" class="gold" data-i18n="endingBtn"></button>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+    <div id="boot-error" class="hidden"></div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

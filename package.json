@@ -1,0 +1,9 @@
+{
+  "name": "the-witness-4k",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/validator.test.js",
+    "test:browser": "node tests/browser.mjs"
+  }
+}
